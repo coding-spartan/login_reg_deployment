@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login & Red | Success</title>
+</head>
+<body>
+    <h1>Success! Welcome, {{request.session.name}}!</h1>
+    <p style='color:limegreen'>Successfuly registered (or logged in)!</p>
+    <form action='/'>
+        <input type='submit' value='Log out'>
+    </form>
+</body>
+</html>
