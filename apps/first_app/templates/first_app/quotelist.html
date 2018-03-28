@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div>
+        <h1>Welcome, {{request.session.name}}</h1>
+        <h2>Quotable Quotes</h2
+            {% for favorite in other_favorite %}
+                {% if not favorite.user.id == request.session.id %}
+                    {% for i in favorite.quotes.all %}
+                        {% if i not in user_favorite.quotes.all %}
+                        <p>{{i.quote_name}}</p>
+                        <p>{{i.quote_by}}</p>
+                        <p>Posted by</p> 
+                        <p><a href='/user_quotes/{{i.id}}'>{{quote.name}}</a></p>  
+
+                        <p><a href='/add_quotelist/{{i.id}}'>Add to My List</a></p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+             {% endfor %}
+        </div>
+
+        <div>
+            <h1><a href='/'>Logout</a></h1>
+
+            <p>Your Favorites:</p>
+                {% for quote in favorite %}
+                <p>{{quote.quote_name}}</p>
+                <p>{{quote.quote_by}}</p>
+                <p>Posted by</p>
+                <p><a href='/user_quotes/{{quote.id}}'>{{request.session.name}}</a></p>  
+
+                 {% if not quote.user.id == request.session.id %}
+                    <p><a href='/remove/{{quote.id}}'>Remove from My List</a></p>
+                     {% endif %}
+               {% endfor %}
+        </div>
+    
+
+    
+        <div>
+        <h1> Contribute a quote: </h1>
+        <form action='/contribute' method='post'>
+        {% csrf_token %}
+        <p>Quote By: <input type='text' name='quote_by'></p>
+        <p>Message:<input type='text' name='quote_name'></p>
+        <input type="submit" value="Submit">
+       </form>
+        </div>
+
+{% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" style='color:red'{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %} 
+
+</body>
+</html> 
